@@ -1,0 +1,275 @@
+﻿@{
+    ViewData["Title"] = "ADMINT";
+}
+
+<<div class="container-fluid">
+    <div class="single-page-title single-page-title-about" style="background-image: url(<?=img?>page-header.jpg);">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Book Shipment</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br>
+
+    <form class="container-fluid" id="load-form">
+
+        @*<div class="col-md-2 form-group">
+            <label>Profile Passport</label>
+            <label for="pp" style="width: 100%;"><img src="<?=img?>user.png" class="photo-preview" style="width: 100%;"></label>
+            <label class="btn btn-primary btn-block" for="pp">Select <i class="fa fa-image"></i></label>
+            <input accept="image/*" type="file" name="passport" id="pp" required="required">
+        </div>*@
+        <div class="col-md-8">
+            <h3>Booking Form</h3>
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Shippers Name <span class="text-danger">*</span></label>
+                </div>
+                <div class="col-md-4 form-group">
+                    <input type="text" name="firstname" class="form-control" placeholder="First" required="required">
+                </div>
+                <div class="col-md-4 form-group">
+                    <input type="text" name="middlename" class="form-control" placeholder="Middle">
+                    <input type="hidden" name="type" value="if">
+                </div>
+                <div class="col-md-4 form-group">
+                    <input type="text" name="lastname" class="form-control" placeholder="Last" required="required">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    <label>Date of Birth <span class="text-danger">*</span></label>
+                    <input type="text" name="dob" class="form-control datepick" required="required">
+                </div>
+                <div class="col-md-4 form-group" required="required">
+                    <label>Sex <span class="text-danger">*</span></label>
+                    <select class="form-control" name="sex" required="required">
+                        <option value="">Select</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label>Marital Status <span class="text-danger">*</span></label>
+                    <select class="form-control" name="marital_status" required="required">
+                        <option value="">Select</option>
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                        <option value="Third choice">Third choice</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <label>Address <span class="text-danger">*</span></label>
+                    <textarea rows="4" placeholder="Address" class="form-control" name="h_address_one" required="required"></textarea>
+                </div>
+                @*<div class="col-md-6 form-group">
+                <label>Permanent Address <span class="text-danger">*</span></label>
+                <textarea rows="4" placeholder="Address 2" class="form-control" name="h_address_two" required="required"></textarea>
+            </div>*@
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <input type="text" name="h_city" class="form-control" placeholder="City" required="required">
+                </div>
+                <div class="col-md-3 form-group">
+                    <input type="text" name="h_state" class="form-control" placeholder="State / Province / Region" required="required">
+                </div>
+                <div class="col-md-3 form-group">
+                    <input type="number" name="h_zipcode" class="form-control" placeholder="Postal / Zipcode" required="required">
+                </div>
+                <div class="col-md-3 form-group">
+                    <select class="form-control" required="required" name="h_country">
+                        <option value="">Country</option>
+                        <?php
+                        $country = $this->gm->country();
+                        for ($i=0; $i < count($country); $i++) {
+                        echo '
+                        <option value="'.$country[$i].'">'.$country[$i].'</option>';
+                        }
+                        ?>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    <label>Email Address <span class="text-danger">*</span></label>
+                    <input type="email" id="email" name="email" class="form-control" required="required">
+                </div>
+                @*<div class="col-md-4 form-group">
+                <label>Confirm Email Address <span class="text-danger">*</span></label>
+                <input type="email" data-rule-equalto="#email" name="confirm_email" class="form-control" required="required">
+            </div>*@
+                <div class="col-md-4 form-group">
+                    <label>Telephone Number <span class="text-danger">*</span></label>
+                    <input type="text" name="phone" class="form-control" required="required">
+                </div>
+            </div>
+
+            @*<div class="row">
+            <div class="col-md-4 form-group">
+                <label data-toggle="tooltip" title="Biometric Verification Number"> BVN <span class="text-danger">*</span></label>
+                <input type="number" name="bvn" class="form-control" required="required">
+            </div>
+            <div class="col-md-4 form-group">
+                <label>Means of Identifications <span class="text-danger">*</span></label>
+                <select class="form-control" required="required" name="id">
+                    <option value="">Select</option>
+                    <option value="International Passport">International Passport</option>
+                    <option value="Driver's Licence">Driver's Licence</option>
+                    <option value="National ID Card">National ID Card</option>
+                    <option value="Parmanent Voter's Card">Parmanent Voter's Card</option>
+                </select>
+            </div>
+            <div class="col-md-4 form-group">
+                <label>ID Expiry Date</label>
+                <input type="text" name="id_expiry_date" class="form-control datepick">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <label>Time at Current Home Address <span class="text-danger">*</span></label>
+            </div>
+            <div class="col-md-6 form-group">
+                <input type="number" name="time" class="form-control" required="required">
+            </div>
+            <div class="col-md-6 form-group">
+                <select class="form-control" name="time_type" required="required">
+                    <option value="Month">Month</option>
+                    <option value="Year">Year</option>
+                </select>
+            </div>
+        </div>*@
+
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <label>Receiver's Name </label>
+                    <input type="text" name="employer_name" class="form-control">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Receiver's Address</label>
+                </div>
+                <div class="col-md-12 form-group">
+                    <textarea rows="4" placeholder="Address" class="form-control" name="e_address_one"></textarea>
+                </div>
+                @*<div class="col-md-6 form-group">
+                <textarea rows="4" placeholder="Address 2" class="form-control" name="e_address_two"></textarea>
+            </div*@>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <input type="text" name="e_city" class="form-control" placeholder="City">
+                </div>
+                <div class="col-md-3 form-group">
+                    <input type="text" name="e_state" class="form-control" placeholder="State / Province / Region">
+                </div>
+                <div class="col-md-3 form-group">
+                    <input type="number" name="e_zipcode" class="form-control" placeholder="Postal / Zipcode">
+                </div>
+                <div class="col-md-3 form-group">
+                    <select class="form-control" name="e_country">
+                        <option value="">Country</option>
+                        <?php
+                        $country = $this->gm->country();
+                        for ($i=0; $i < count($country); $i++) {
+                        echo '
+                        <option value="'.$country[$i].'">'.$country[$i].'</option>';
+                        }
+                        ?>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    <label>Email Address <span class="text-danger">*</span></label>
+                    <input type="email" id="email" name="email" class="form-control" required="required">
+                </div>
+                @*<div class="col-md-4 form-group">
+                <label>Confirm Email Address <span class="text-danger">*</span></label>
+                <input type="email" data-rule-equalto="#email" name="confirm_email" class="form-control" required="required">
+            </div>*@
+                <div class="col-md-4 form-group">
+                    <label>Telephone Number <span class="text-danger">*</span></label>
+                    <input type="text" name="phone" class="form-control" required="required">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Parcel <span class="text-danger">*</span></label>
+                </div>
+                <div class="col-md-4 form-group">
+                    <input type="text" name="Items" class="form-control" placeholder="Items" required="required">
+                </div>
+                <div class="col-md-4 form-group">
+                    <input type="text" name="Quatities" class="form-control" placeholder="Quatities">
+                    <input type="hidden" name="type" value="if">
+                </div>
+                <div class="col-md-4 form-group">
+                    <input type="text" name="Description" class="form-control" placeholder="Description">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Delivery Info <span class="text-danger">*</span></label>
+                </div>
+                <div class="col-md-4 form-group">
+                    <input type="text" name="Sent Date" class="form-control" placeholder="Sent Date" required="required">
+                </div>
+                <div class="col-md-4 form-group">
+                    <input type="text" name="Delivery Date" class="form-control" placeholder="Delivery Date">
+                    <input type="hidden" name="type" value="if">
+                </div>
+                <div class="col-md-4 form-group">
+                    <input type="text" name="Status" class="form-control" placeholder="Status">
+                </div>
+            </div>
+            @*<div class="row">
+            <div class="col-md-4 form-group">
+                <label>Placement (Min Amt <?=cs('ngn', '')?>100,000)</label>
+                <input type="text" name="placement" required="required" class="form-control" data-inputmask='"alias": "decimal", "groupSeparator": ",", "autoGroup": true, "digits": 2, "digitsOptional": false, "placeholder": "0"' data-mask>
+            </div>
+
+            <div class="col-md-4 form-group">
+                <label>Tenure</label>
+                <select class="form-control" name="tenure" required="required">
+                    <option value="30">30 days</option>
+                    <option value="60">60 days</option>
+                    <option value="90">90 days</option>
+                    <option value="180">180 days</option>
+                    <option value="365">365 days</option>
+                </select>
+            </div>
+
+            <div class="col-md-4 form-group">
+                <br>
+                <label>Rate (Negotiable)</label>
+            </div>
+        </div>*@
+
+
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <button class="btn btn-lg btn-primary btn-block">Submit <i class="fa fa-send"></i></button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <br><br>
+</div>
