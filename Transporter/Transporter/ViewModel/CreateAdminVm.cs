@@ -1,4 +1,4 @@
-﻿namespace Transporter.Controllers
+﻿namespace Transporter.ViewModel
 {
     public class CreateAdminVm
     {
